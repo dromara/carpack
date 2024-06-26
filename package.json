@@ -1,7 +1,7 @@
 {
   "name": "carpack",
   "version": "1.0.0",
-  "description": "📦 The packer of Newcar to package animation into Windows, MacOS, Linux, Android, IOS with Tarui.",
+  "description": "📦 The packer of Newcar to package animation into Windows, MacOS, Linux, Android, IOS with Tauri.",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
