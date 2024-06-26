@@ -1,0 +1,21 @@
+{
+  "name": "carpack",
+  "version": "1.0.0",
+  "description": "📦 The packer of Newcar to package animation into Windows, MacOS, Linux, Android, IOS with Tarui.",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "BugDuck Team <bugduck@163.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "clerc": "^0.44.0"
+  }
+}
