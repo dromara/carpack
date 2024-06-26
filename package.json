@@ -6,7 +6,7 @@
     "build": "tsup",
     "dev": "tsup --watch"
   },
-  "type": "module",
+  "type": "commonjs",
   "keywords": [],
   "author": "BugDuck Team <bugduck@163.com>",
   "license": "Apache-2.0",
@@ -17,5 +17,8 @@
   },
   "dependencies": {
     "clerc": "^0.44.0"
+  },
+  "bin": {
+    "carpack": "./dist/index.js"
   }
 }

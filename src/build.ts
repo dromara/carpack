@@ -29,7 +29,7 @@ async function moveFiles(sourceDir: string, targetDir: string) {
 }
 
 
-export async function build(config: CarpackConfig = {}) {
+export async function build(config: CarpackConfig = {}, dev?: boolean) {
   config.windowConfig ??= {}
 
   const newCarDir = '.newcar';
@@ -38,7 +38,12 @@ export async function build(config: CarpackConfig = {}) {
     type: 'module',
     devDependencies: {
       'vite': 'latest',
-      '@tauri-apps/cli': 'latest'
+      '@tauri-apps/cli': 'latest',
+      '@types/node': 'latest'
+    },
+    dependencies: {
+      'newcar': 'latest',
+      'canvaskit-wasm': '0.39.1',
     },
     scripts: {
       'vite:build': 'vite build',
@@ -52,11 +57,11 @@ export async function build(config: CarpackConfig = {}) {
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "devPath": ".",
+    "devPath": "./dist",
     "distDir": "./dist"
   },
   "package": {
-    "productName": "temp",
+    "productName": "${config.name}",
     "version": "0.1.0"
   },
   "tauri": {
@@ -104,9 +109,9 @@ export async function build(config: CarpackConfig = {}) {
     },
     "windows": [
       {
-        "fullscreen": false,
+        "fullscreen": ${config.windowConfig.fullscreen ?? false},
         "height": ${config.windowConfig.winHeight ?? 600},
-        "resizable": true,
+        "resizable": ${config.windowConfig.resizable ?? true},
         "title": "${config.windowConfig.title ?? 'Newcar App'}",
         "width": ${config.windowConfig.winWidth ?? 800}
       }
@@ -134,7 +139,7 @@ export default defineConfig({
 </head>
 <body>
   <canvas id="${config.canvasID ?? 'canvas'}" width="${config.width ?? 800}" height="${config.height ?? 600}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: black"></canvas>
-  <script type="module" src="./main.ts"></script>
+  <script type="module" src="${config.main ?? './main.ts'}"></script>
 </body>
 </html>
 `
@@ -156,7 +161,7 @@ export default defineConfig({
     const { stdout: out2, stderr: err2 } = await execAsync('npm run vite:build', { cwd: newCarDir })
     console.log(out2);
     console.error(err2);
-    const { stdout: out3, stderr: err3 } = await execAsync('npm run tauri:build', { cwd: newCarDir })
+    const { stdout: out3, stderr: err3 } = await execAsync(dev ? 'npm run tauri:build' : 'npm run tauri:dev', { cwd: newCarDir })
     console.log(out3);
     console.error(err3);
   } catch (error) {

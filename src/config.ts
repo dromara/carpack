@@ -12,6 +12,10 @@ export interface CarpackConfig {
     winWidth?: number,
     winHeight?: number,
     title?: string,
+    icon?: string,
+    resizable?: boolean,
+    maximizable?: boolean,
+    fullscreen?: boolean,
   }
 }
 

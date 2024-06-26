@@ -19,15 +19,19 @@ const cli = Clerc.create()
   .version('1.0.0')
   .command('init', 'Initialize a Newcar Project.', {
     parameters: [
-      '[type]'
+      '[name]'
     ]
   })
-  .command('build', 'Build a Newcar Project.')
+  .command('build', 'Build a Newcar Project.', {
+    parameters: [
+      '[dev]'
+    ]
+  })
   .on('init', (context) => {
-    init(config)
+    init(context.parameters.name)
   })
   .on('build', (context) => {
-    build(config)
+    build(config, context.parameters.dev ? true : false)
   })
   .parse()
 
