@@ -19,16 +19,16 @@ const cli = Clerc.create()
       '[name]'
     ]
   })
-  .command('build', 'Build a Newcar Project.', {
-    parameters: [
-      '[dev]'
-    ]
-  })
+  .command('build', 'Build a Newcar Project.')
+  .command('dev', 'Watch file changed.')
   .on('init', (context) => {
     init(context.parameters.name)
   })
   .on('build', (context) => {
-    build(config.default, context.parameters.dev ? true : false)
+    build(config.default, false)
+  })
+  .on('dev', (context) => {
+    build(config.default, true)
   })
   .parse()
 

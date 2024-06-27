@@ -67,6 +67,7 @@ export async function build(config: CarpackConfig = {}, dev?: boolean) {
     },
     scripts: {
       'vite:build': 'vite build',
+      'vite:dev': 'vite',
       'tauri:build': 'tauri build',
       'tauri:init': 'tauri init --ci --dev-path ..',
       'tauri:dev': 'tauri dev',
@@ -178,8 +179,6 @@ export default defineConfig({
 `
 
   try {
-    if (fsa.existsSync('.newcar'))
-      await fs.rmdir(newCarDir, { recursive: true })
     await fs.mkdir(newCarDir, { recursive: true });
     copyDirectory(resolve('./src'), resolve('./.newcar/js'))
     await fs.writeFile(resolve(newCarDir, 'package.json'), JSON.stringify(packageJson, null, 2));
@@ -192,9 +191,12 @@ export default defineConfig({
     await execAsync('npm install', { cwd: newCarDir });
     console.log('Installing dependencies finished.')
     await execAsync('npm run vite:build', { cwd: newCarDir })
-    moveFiles('./.newcar/node_modules', './.newcar/dist/node_modules')
+    // await moveFiles('./.newcar/node_modules', './.newcar/dist/node_modules')
+    await fs.copyFile('./.newcar/node_modules/canvaskit-wasm/bin/canvaskit.wasm', './.newcar/dist/assets/canvaskit.wasm')
     console.log('Build finished.')
-    await execAsync(dev ? 'npm run tauri:build' : 'npm run tauri:dev & npm run vite:build', { cwd: newCarDir })
+    // await execAsync('npm install', { cwd: newCarDir });
+    console.log('Started...')
+    await execAsync(dev ? 'npm run tauri:dev' : 'npm run tauri:build', { cwd: newCarDir })
   } catch (error) {
     console.error('Error during build process:', error);
   }
