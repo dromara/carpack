@@ -7,6 +7,13 @@
     "dev": "tsup --watch"
   },
   "type": "commonjs",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "keywords": [],
   "author": "BugDuck Team <bugduck@163.com>",
   "license": "Apache-2.0",
