@@ -3,7 +3,7 @@ import { CarpackConfig, defineConfig } from './config'
 import fs from 'node:fs'
 
 export function init(path: string) {
-  exec('git clone https://github.com/dromara/starter-carpack.git ' + path ?? '', (error, stdout, stderr) => {
+  exec('git clone https://github.com/dromara/starter-carpack.git', (error, stdout, stderr) => {
     if (error)
       throw error
     console.log(stdout)
