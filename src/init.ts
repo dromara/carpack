@@ -9,8 +9,4 @@ export function init(path: string) {
     console.log(stdout)
     console.log(stderr)
   })
-  fs.writeFileSync('./carpack.config.ts', `export default ${JSON.stringify(defineConfig({
-    name: 'your-project-name',
-    main: './src/main.ts',
-  }), null, 2)}`)
 }
