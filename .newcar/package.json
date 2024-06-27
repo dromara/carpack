@@ -1,0 +1,14 @@
+{
+  "name": "temp",
+  "type": "module",
+  "devDependencies": {
+    "vite": "latest",
+    "@tauri-apps/cli": "latest"
+  },
+  "scripts": {
+    "vite:build": "vite build",
+    "tauri:build": "tauri build",
+    "tauri:init": "tauri init --ci --dev-path ..",
+    "tauri:dev": "tauri dev"
+  }
+}
