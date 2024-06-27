@@ -178,7 +178,8 @@ export default defineConfig({
 `
 
   try {
-    await fs.rmdir(newCarDir, { recursive: true })
+    if (fsa.existsSync('.newcar'))
+      await fs.rmdir(newCarDir, { recursive: true })
     await fs.mkdir(newCarDir, { recursive: true });
     copyDirectory(resolve('./src'), resolve('./.newcar/js'))
     await fs.writeFile(resolve(newCarDir, 'package.json'), JSON.stringify(packageJson, null, 2));
