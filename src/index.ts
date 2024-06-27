@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Clerc } from "clerc";
 import { init } from "./init.ts";
 import { resolve } from "node:path";
